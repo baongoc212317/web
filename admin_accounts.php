@@ -39,12 +39,9 @@ if(isset($_GET['delete'])){
 <section class="accounts">
 
    <h1 class="heading">Admin Accounts</h1>
-   <a href="register_admin.php" class="option-btn" style="width: fit-content;  margin: 20px auto">Thêm mới</a>   <div class="box-container">
-   <!--<div class="box">
-      <p>Thêm mới Admin Accounts</p>
-      <a href="register_admin.php" class="option-btn">Thêm mới</a>
-   </div>
--->
+   <a href="register_admin.php" class="option-btn" style="width: fit-content;  margin: 20px auto">Thêm mới</a>   
+   
+   <div class="box-container">
 
    <?php
       $select_accounts = $conn->prepare("SELECT * FROM `admins`");
@@ -52,18 +49,20 @@ if(isset($_GET['delete'])){
       if($select_accounts->rowCount() > 0){
          while($fetch_accounts = $select_accounts->fetch(PDO::FETCH_ASSOC)){   
    ?>
-   <div class="box">
-      <p> Admin Id : <span><?= $fetch_accounts['id']; ?></span> </p>
-      <p> Admin name : <span><?= $fetch_accounts['name']; ?></span> </p>
-      <div class="flex-btn">
-         <a href="admin_accounts.php?delete=<?= $fetch_accounts['id']; ?>" onclick="return confirm('Bạn muốn xóa tài khoản này?')" class="delete-btn">Xóa</a>
-         <?php
+
+      <div class="box">
+        <p> Admin Id : <span><?= $fetch_accounts['id']; ?></span> </p>
+        <p> Admin name : <span><?= $fetch_accounts['name']; ?></span> </p>
+         <div class="flex-btn">
+          <a href="admin_accounts.php?delete=<?= $fetch_accounts['id']; ?>" onclick="return confirm('Bạn muốn xóa tài khoản này?')" class="delete-btn">Xóa</a>
+          <?php
             if($fetch_accounts['id'] == $admin_id){
                echo '<a href="update_profile.php" class="option-btn">Chỉnh sửa</a>';
             }
          ?>
-      </div>
-   </div>
+         </div>
+       </div>
+
    <?php
          }
       }else{
@@ -74,15 +73,6 @@ if(isset($_GET['delete'])){
    </div>
 
 </section>
-
-
-
-
-
-
-
-
-
 
 
 
